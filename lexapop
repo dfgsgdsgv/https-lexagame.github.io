@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Игра ещё не вышла лол</title>
+  <!-- Подключаем элегантный шрифт -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at 30% 30%, #1a1e2b, #0b0d14);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Анимированный фон с плавающими элементами */
+    .background-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.05;
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+      filter: blur(40px);
+      animation: float 16s infinite ease-in-out;
+    }
+
+    .floating-circle:nth-child(1) {
+      width: 500px;
+      height: 500px;
+      top: -100px;
+      left: -100px;
+      animation-duration: 20s;
+      background: linear-gradient(135deg, #c084fc, #8b5cf6);
+    }
+
+    .floating-circle:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      bottom: -80px;
+      right: -60px;
+      animation-duration: 24s;
+      animation-delay: -5s;
+      background: linear-gradient(135deg, #a5b4fc, #6366f1);
+    }
+
+    .floating-circle:nth-child(3) {
+      width: 300px;
+      height: 300px;
+      top: 50%;
+      left: 70%;
+      animation-duration: 18s;
+      animation-delay: -10s;
+      background: linear-gradient(135deg, #d8b4fe, #9333ea);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(30px, -30px) scale(1.05);
+      }
+      66% {
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    /* Основной контейнер с текстом */
+    .main-container {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 900px;
+      padding: 2.5rem 2rem;
+      background: rgba(18, 20, 30, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 3.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .main-container:hover {
+      box-shadow: 0 40px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Декоративная звёздочка/иконка перед текстом */
+    .icon-row {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .star-icon {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 12px #c084fc);
+      animation: gentlePulse 2.8s infinite alternate;
+    }
+
+    @keyframes gentlePulse {
+      0% {
+        opacity: 0.7;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
+
+    /* Главная фраза */
+    .hero-text {
+      font-size: clamp(3.2rem, 12vw, 5.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #f0e6ff 0%, #c4b5fd 40%, #a78bfa 70%, #e9d5ff 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 25px rgba(167, 139, 250, 0.4);
+      margin-bottom: 0.5rem;
+      animation: shimmer 5s infinite alternate, textFloat 6s ease-in-out infinite;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Дополнительное свечение */
+    .glow-effect {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.3) 0%, transparent 70%);
+      filter: blur(25px);
+      z-index: -1;
+      opacity: 0.7;
+      animation: glowPulse 4s infinite alternate;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes textFloat {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glowPulse {
+      0% {
+        opacity: 0.4;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+    }
+
+    /* Подпись (для атмосферы) */
+    .sub-text {
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(220, 215, 240, 0.8);
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      display: inline-block;
+      padding: 0.4rem 1.8rem;
+      border-radius: 3rem;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: 0.3s;
+    }
+
+    .sub-text:hover {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Декоративные линии по бокам (на больших экранах) */
+    .decor-line {
+      display: inline-block;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #a78bfa, #c084fc, transparent);
+      margin: 0 1rem;
+      vertical-align: middle;
+      opacity: 0.7;
+    }
+
+    /* Адаптив */
+    @media (max-width: 600px) {
+      .main-container {
+        padding: 2rem 1.2rem;
+        border-radius: 2.5rem;
+      }
+      .decor-line {
+        width: 30px;
+        margin: 0 0.4rem;
+      }
+      .sub-text {
+        font-size: 1rem;
+        padding: 0.3rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Анимированный фон -->
+  <div class="background-animation">
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+  </div>
+
+  <!-- Центральный блок -->
+  <div class="main-container">
+    <div class="icon-row">
+      <span class="star-icon">✨</span>
+      <span class="star-icon" style="animation-delay: 0.4s; font-size: 1.8rem;">💫</span>
+      <span class="star-icon" style="animation-delay: 0.8s;">✨</span>
+    </div>
+
+    <!-- Главный текст с обёрткой для свечения -->
+    <div style="position: relative; display: inline-block;">
+      <div class="glow-effect"></div>
+      <h1 class="hero-text">
+        <span class="decor-line"></span> Игра ещё не вышла <span class="decor-line"></span>
+      </h1>
+    </div>
+    
+    <!-- "лол" выделяется стилем, но остаётся частью композиции -->
+    <div style="margin-top: 0.2rem;">
+      <span style="font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #f5d0fe, #d8b4fe); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 0.05em; text-shadow: 0 0 18px #c084fc; display: inline-block; transform: rotate(-1deg);">
+        лол
+      </span>
+    </div>
+    
+    <div class="sub-text">
+      ожидание — тоже часть игры
+    </div>
+    
+    <!-- Маленькая деталь: плавающие точки -->
+    <div style="margin-top: 1.8rem; display: flex; justify-content: center; gap: 0.6rem; opacity: 0.7;">
+      <span style="width: 8px; height: 8px; background: #c084fc; border-radius: 50%; display: inline-block; animation: gentlePulse 2s infinite alternate 0s;"></span>
+      <span style="width: 8px; height: 8px; background: #a78bfa; border-radius: 50%; display: inline-block; animation: gentlePulse 2s infinite alternate 0.3s;"></span>
+      <span style="width: 8px; height: 8px; background: #c084fc; border-radius: 50%; display: inline-block; animation: gentlePulse 2s infinite alternate 0.6s;"></span>
+    </div>
+  </div>
+</body>
+</html>
